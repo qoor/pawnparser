@@ -2126,6 +2126,13 @@ static cell _lexval;
 static char _lexstr[sLINEMAX+1];
 static int _lexnewline;
 
+SC_FUNC void skipinit(void)
+{
+  iflevel = 0;            /* preprocessor: nesting of "#if" is currently 0 */
+  skiplevel = 0;          /* preprocessor: not currently skipping */
+  icomment = 0;           /* currently not in a multiline comment */
+}
+
 SC_FUNC void lexinit(void)
 {
   stkidx=0;             /* index for pushstk() and popstk() */

@@ -318,7 +318,9 @@ static short lastfile;
   } /* if */
   va_end(argptr);
 
-  if ((number>=100 && number<200) || errnum>25){
+  /* Edited by Qoo */
+  //if ((number>=100 && number<200) || errnum>25){
+  if (number == 102 || number == 103 || number == 106 || errnum > 25) {
     if (errfname[0]=='\0') {
       /*va_start(argptr,number);
       pc_error(0,"\nCompilation aborted.\n\n",NULL,0,0,argptr);

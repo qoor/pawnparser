@@ -302,10 +302,7 @@ SC_FUNC void delete_doincludefiletable(void)
 #if !defined NO_DEFINE
 
 stringpair substpair = { NULL, NULL, NULL};  /* list of substitution pairs */
-stringpair totalsubstpair = { NULL, NULL, NULL };  /* list of substitution pairs */
-
 stringpair *substindex['z'-PUBLIC_CHAR+1]; /* quick index to first character */
-stringpair *totalsubstindex['z'-PUBLIC_CHAR+1]; /* Edited by Qoo */
 
 static void adjustindex(char c)
 {
@@ -316,8 +313,6 @@ static void adjustindex(char c)
   for (cur=substpair.next; cur!=NULL && cur->first[0]!=c; cur=cur->next)
     /* nothing */;
   substindex[(int)c-PUBLIC_CHAR]=cur;
-
-  totalsubstindex[(int)c - PUBLIC_CHAR] = cur; /* Edited by Qoo */
 }
 
 SC_FUNC stringpair *insert_subst(char *pattern,char *substitution,int prefixlen)
@@ -333,8 +328,6 @@ SC_FUNC stringpair *insert_subst(char *pattern,char *substitution,int prefixlen)
   if ((cur=insert_stringpair(&substpair,pattern,substitution,prefixlen))==NULL)
     error(103);       /* insufficient memory (fatal error) */
 
-  insert_stringpair(&totalsubstpair, pattern, substitution, prefixlen); /* Edited by Qoo */
-
   adjustindex(*pattern);
   return cur;
 }
@@ -348,18 +341,6 @@ SC_FUNC stringpair *find_subst(char *name,int length)
   item=substindex[(int)*name-PUBLIC_CHAR];
   if (item!=NULL)
     item=find_stringpair(item,name,length);
-  return item;
-}
-
-SC_FUNC stringpair* find_totalsubst(char* name, int length)
-{
-  stringpair* item;
-  assert(name != NULL);
-  assert(length > 0);
-  assert(*name >= 'A' && *name <= 'Z' || *name >= 'a' && *name <= 'z' || *name == '_' || *name == PUBLIC_CHAR);
-  item = totalsubstindex[(int)* name - PUBLIC_CHAR];
-  if (item != NULL)
-    item = find_stringpair(item, name, length);
   return item;
 }
 

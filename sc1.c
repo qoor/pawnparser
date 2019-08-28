@@ -656,6 +656,8 @@ int pc_compile(int argc, char *argv[])
   inpfmark=pc_getpossrc(inpf_org);
   do {
     /* reset "defined" flag of all functions and global variables */
+    skipinit(); /* Edited by Qoo */
+
     reduce_referrers(&glbtab);
     delete_symbols(&glbtab,0,TRUE,FALSE);
     delete_heaplisttable();

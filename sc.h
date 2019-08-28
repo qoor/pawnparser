@@ -938,6 +938,8 @@ SC_VDECL stringlist* insert_doincludefile(char* path);
 SC_VDECL char* get_doincludefile(int index);
 SC_VDECL void delete_doincludefiletable(void);
 
+SC_VDECL void skipinit(void);
+
 #endif /* SC_SKIP_VDECL */
 
 /* These macros are adapted from LibDGG libdgg-int64.h, see
